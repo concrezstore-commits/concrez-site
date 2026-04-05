@@ -39,14 +39,6 @@
 
         .loader-hidden { opacity: 0; visibility: hidden; }
         body.loading { overflow: hidden; }
-
-        .spotify-container {
-            border: 1px solid #18181b;
-            border-radius: 12px;
-            overflow: hidden;
-            background: #000;
-            min-height: 152px;
-        }
     </style>
 </head>
 <body class="loading">
@@ -63,7 +55,7 @@
     </nav>
 
     <section class="py-32 px-6 text-center">
-        <h1 class="font-brand text-5xl md:text-9xl uppercase italic leading-none tracking-tighter mb-8">
+        <h1 class="font-brand text-5xl md:text-9xl uppercase italic leading-none tracking-tighter mb-8 text-white">
             CONCREZ <br> <span class="text-zinc-800">ALWAYS WITH GOD 🙏🏼.</span>
         </h1>
         <p class="text-zinc-500 text-xs font-bold uppercase tracking-[0.4em]">Jales - São Paulo - Brasil</p>
@@ -98,11 +90,15 @@
     <section class="py-20 px-6 bg-black border-t border-zinc">
         <div class="max-w-xl mx-auto">
             <p class="text-zinc-600 text-[9px] font-black uppercase tracking-[0.4em] mb-6 text-center">Ouça a vibe da CONCREZ: Matuê - 333</p>
-            <div class="spotify-container">
-                <iframe style="border-radius:12px" 
-                    src="https://open.spotify.com/home" 
-                    width="100%" height="152" frameBorder="0" allowfullscreen="" 
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+            <div class="aspect-video border border-zinc-800 rounded-lg overflow-hidden shadow-2xl shadow-red-900/10">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/videoseries?list=PLpZ3p9L8i_p4vK-u4P1N3Jm9lF7qF-v4Y" 
+                    title="Matuê 333" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
                 </iframe>
             </div>
         </div>

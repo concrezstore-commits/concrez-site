@@ -3,59 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONCREZ | Streetwear Culture</title>
+    <title>CONCREZ | Streetwear</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
-        .neon-text { text-shadow: 0 0 10px #ff0000; }
-        .border-zinc { border-color: #27272a; }
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap');
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .font-brand { font-family: 'Archivo Black', sans-serif; }
+        .border-zinc { border-color: #18181b; }
+        .bg-card { background-color: #09090b; }
     </style>
 </head>
 <body>
 
-    <header class="py-10 text-center border-b border-zinc">
-        <img src="1000037173.webp" alt="CONCREZ LOGO" class="mx-auto w-48 mb-4">
-        <p class="text-zinc-500 uppercase tracking-widest text-xs font-bold">Jales-SP | Concrete Culture</p>
-    </header>
+    <nav class="py-6 px-6 border-b border-zinc flex justify-between items-center">
+        <span class="font-brand text-2xl tracking-tighter uppercase italic text-red-600">CONCREZ</span>
+        <div class="flex gap-4">
+            <a href="https://www.instagram.com/concrez.wear" class="text-[10px] font-black uppercase border border-white px-3 py-1">Instagram</a>
+        </div>
+    </nav>
 
-    <section class="py-20 px-6 text-center">
-        <h1 class="text-4xl md:text-6xl font-black italic uppercase leading-none mb-6">
-            "A VISÃO DE QUEM SABE <br> <span class="text-red-600">ONDE QUER CHEGAR."</span>
+    <section class="py-24 px-6 text-center">
+        <h1 class="font-brand text-5xl md:text-8xl uppercase italic leading-none tracking-tighter mb-8">
+            CONCRETE <br> <span class="text-zinc-800">CULTURE.</span>
         </h1>
-        <div class="w-20 h-1 bg-red-600 mx-auto"></div>
+        <p class="text-zinc-500 text-xs font-bold uppercase tracking-[0.3em]">Jales - São Paulo - Brasil</p>
     </section>
 
-    <section class="py-16 px-6 bg-zinc-950">
-        <h2 class="text-2xl font-black uppercase mb-12 text-center tracking-tighter">Drops Disponíveis</h2>
-        
-        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-black border border-zinc p-4 text-center">
-                <img src="1000037181.jpg" alt="Peça Concrez" class="w-full aspect-square object-cover mb-4">
-                <h3 class="font-black uppercase italic mb-2">T-Shirt Concrez Classic</h3>
-                <p class="text-red-600 font-bold mb-4">R$ 119,90</p>
-                <a href="https://wa.me/seunumeroaqui" class="block bg-white text-black font-black py-3 uppercase text-sm hover:bg-red-600 hover:text-white transition">Garanta a Sua</a>
+    <section class="py-12 px-4 bg-zinc-950">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="font-brand text-xl uppercase mb-10 border-l-4 border-red-600 pl-4">Drops Disponíveis</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="bg-card border border-zinc p-3 group">
+                    <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-4">
+                        <img src="NOME_DA_SUA_FOTO.jpg" alt="Peça Concrez" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-brand text-sm uppercase italic">T-Shirt Logo Grafite</h3>
+                            <p class="text-zinc-500 text-[10px] font-bold uppercase">Edição Limitada</p>
+                        </div>
+                        <span class="text-red-600 font-black text-sm">R$ 119,90</span>
+                    </div>
+                    <a href="https://wa.me/seunumerodewhatsapp" class="block w-full bg-white text-black text-center py-3 font-black uppercase text-[10px] hover:bg-red-600 hover:text-white transition">Comprar via WhatsApp</a>
+                </div>
+
+                <div class="bg-card border border-zinc p-3 group">
+                    <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-4">
+                        <img src="NOME_DA_SUA_FOTO_2.jpg" alt="Peça Concrez" class="w-full h-full object-cover opacity-80">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="font-brand text-sm uppercase italic">Hoodie Concrete</h3>
+                            <p class="text-zinc-500 text-[10px] font-bold uppercase">Drop 01</p>
+                        </div>
+                        <span class="text-zinc-500 font-black text-sm">ESGOTADO</span>
+                    </div>
+                    <div class="text-center py-3 border border-zinc text-zinc-700 font-black uppercase text-[10px]">Indisponível</div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <footer class="py-20 text-center border-t border-zinc">
-        <h3 class="text-xl font-black uppercase italic mb-8 italic">Conecte-se</h3>
-        
-        <div class="flex justify-center gap-10 mb-12">
-            <a href="https://www.instagram.com/concrez.wear" class="group">
-                <img src="1000037175.jpg" alt="Instagram" class="w-12 h-12 rounded-full border-2 border-white group-hover:border-red-600 p-1">
-                <p class="text-[10px] mt-2 font-bold uppercase text-zinc-500 group-hover:text-white">Instagram</p>
-            </a>
-            <a href="https://www.tiktok.com/@concrez.wear" class="group">
-                <img src="1000037176.jpg" alt="TikTok" class="w-12 h-12 rounded-full border-2 border-white group-hover:border-red-600 p-1">
-                <p class="text-[10px] mt-2 font-bold uppercase text-zinc-500 group-hover:text-white">TikTok</p>
-            </a>
-        </div>
-
-        <p class="text-[10px] text-zinc-600 font-bold uppercase tracking-widest">
-            By João Pedro & Gustavo Pereira | Jales-SP
-        </p>
+    <footer class="py-20 px-6 border-t border-zinc text-center">
+        <p class="text-zinc-700 text-[9px] font-black uppercase tracking-[0.5em] mb-4">CONCREZ WEAR © 2026</p>
+        <p class="text-zinc-500 text-[10px] font-bold uppercase italic">A visão de quem sabe onde quer chegar.</p>
     </footer>
 
 </body>

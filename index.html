@@ -13,7 +13,7 @@
         .border-zinc { border-color: #18181b; }
         .bg-card { background-color: #09090b; }
 
-        /* --- PRELOADER (GATILHO DE ÁUDIO) --- */
+        /* --- PRELOADER (START VIBE) --- */
         #preloader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -26,7 +26,7 @@
 
         .loader-text {
             font-family: 'Archivo Black', sans-serif;
-            font-size: clamp(2rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 12vw, 7rem);
             color: #dc2626; 
             font-style: italic;
             text-transform: uppercase;
@@ -35,24 +35,17 @@
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.05); opacity: 0.7; }
+            50% { transform: scale(1.03); opacity: 0.8; }
         }
 
         .loader-hidden { opacity: 0; visibility: hidden; }
         body.loading { overflow: hidden; }
 
-        #youtube-player-container {
-            position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0);
-        }
+        /* Player Invisível */
+        #youtube-player-container { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
 
-        /* Efeito de hover nas imagens */
-        .product-image {
-            transition: transform 0.6s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.5s;
-        }
-        .group:hover .product-image {
-            transform: scale(1.08);
-            opacity: 1;
-        }
+        /* Estilização da Barra de Pesquisa */
+        #searchInput::placeholder { color: #27272a; }
     </style>
 </head>
 <body class="loading">
@@ -63,7 +56,7 @@
 
     <div id="preloader" onclick="startVibe()">
         <div class="loader-text">CONCREZ</div>
-        <p class="mt-8 text-[9px] font-black uppercase tracking-[0.6em] text-zinc-500 animate-bounce">Toque para entrar</p>
+        <p class="mt-8 text-[9px] font-black uppercase tracking-[0.6em] text-zinc-600 animate-pulse">Toque para entrar no corre</p>
     </div>
 
     <nav class="py-6 px-6 border-b border-zinc flex justify-between items-center sticky top-0 bg-black/90 backdrop-blur-xl z-50">
@@ -71,83 +64,83 @@
         <a href="https://www.instagram.com/concrez.wear" target="_blank" class="text-[10px] font-black uppercase border border-white px-5 py-2.5 hover:bg-white hover:text-black transition duration-300">Instagram</a>
     </nav>
 
-    <header class="py-40 px-6 text-center border-b border-zinc">
-        <h1 class="font-brand text-6xl md:text-[11rem] uppercase italic leading-[0.85] tracking-tighter mb-12">
+    <header class="py-32 px-6 text-center">
+        <h1 class="font-brand text-5xl md:text-[10rem] uppercase italic leading-[0.85] tracking-tighter mb-10">
             CONCREZ <br> <span class="text-zinc-900">ALWAYS WITH GOD🙏🏼.</span>
         </h1>
-        <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-zinc-500 text-[10px] font-black uppercase tracking-[0.4em]">
-            <span>Jales, SP</span>
-            <span class="hidden md:block">•</span>
-            <span>Brasil</span>
-            <span class="hidden md:block">•</span>
-            <span>Est. 2026</span>
-        </div>
+        <p class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.5em]">Jales, SP — Brasil</p>
     </header>
+
+    <section class="py-12 px-6 bg-black border-y border-zinc">
+        <div class="max-w-2xl mx-auto relative">
+            <input 
+                type="text" 
+                id="searchInput" 
+                onkeyup="searchProduct()" 
+                placeholder="BUSCAR PEÇA OU CÓDIGO (EX: 001)..." 
+                class="w-full bg-transparent border-b border-zinc-800 py-6 px-4 font-brand text-xl md:text-2xl uppercase italic focus:outline-none focus:border-red-600 transition-all"
+            >
+        </div>
+    </section>
 
     <section class="py-24 px-4 bg-zinc-950">
         <div class="max-w-7xl mx-auto">
-            <div class="mb-16 flex items-center gap-4">
-                <div class="h-[2px] w-12 bg-red-600"></div>
-                <h2 class="font-brand text-3xl uppercase italic tracking-tighter">New Drop</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 
-                <div class="bg-card border border-zinc p-5 group hover:border-red-600/50 transition-all duration-500">
-                    <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-8 relative">
-                        <img src="CAMISA CONCREZ SCARFACE.jpg" class="product-image w-full h-full object-cover opacity-60">
-                        <div class="absolute top-6 left-6 bg-red-600 text-white text-[10px] font-black px-3 py-1.5 uppercase italic">CAMISA SCARFACE</div>
+                <div class="product-card bg-card border border-zinc p-5 group hover:border-red-600 transition-all duration-500" data-name="EDITON SCARFACE 001">
+                    <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-8">
+                        <img src="CAMISA CONCREZ SCARFACE.jpg" class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-100 transition duration-700">
                     </div>
                     <div class="flex justify-between items-end mb-8">
                         <div>
-                            <p class="text-zinc-500 text-[9px] font-black uppercase mb-1">Streetwear Edition</p>
-                            <h3 class="font-brand text-xl md:text-2xl uppercase italic">CAMISA CONCREZ SCARFACE</h3>
+                            <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 001</p>
+                            <h3 class="font-brand text-xl uppercase italic">CAMISA SCARFACE</h3>
                         </div>
-                        <span class="text-red-600 font-black text-2xl">R$ 95</span>
+                        <span class="text-red-600 font-black text-2xl">R$ 95,00</span>
                     </div>
-                    <a href="https://wa.me/5517999999999" target="_blank" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition-all duration-300">Comprar WhatsApp</a>
+                    <a href="https://wa.me/5517999999999" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition">Comprar via WhatsApp</a>
                 </div>
 
-                <div class="bg-card border border-zinc p-5 group hover:border-red-600/50 transition-all duration-500">
+                <div class="product-card bg-card border border-zinc p-5 group hover:border-red-600 transition-all duration-500" data-name="ESSENTIAL BASIC 002">
                     <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-8">
-                        <img src="CAMISA CONCREZ BÁSICA.jpg" class="product-image w-full h-full object-cover opacity-60">
+                        <img src="CAMISA CONCREZ BÁSICA.jpg" class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-100 transition duration-700">
                     </div>
                     <div class="flex justify-between items-end mb-8">
                         <div>
-                            <p class="text-zinc-500 text-[9px] font-black uppercase mb-1">CAMISA BASIC</p>
-                            <h3 class="font-brand text-xl md:text-2xl uppercase italic">CAMISA CONCREZ BASIC</h3>
+                            <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 002</p>
+                            <h3 class="font-brand text-xl uppercase italic">CAMISA CONCREZ BASIC</h3>
                         </div>
-                        <span class="text-red-600 font-black text-2xl">R$ 65</span>
+                        <span class="text-red-600 font-black text-2xl">R$ 70,00</span>
                     </div>
-                    <a href="https://wa.me/5517999999999" target="_blank" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition-all duration-300">Comprar WhatsApp</a>
+                    <a href="https://wa.me/5517999999999" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition">Comprar via WhatsApp</a>
                 </div>
 
-                <div class="bg-card border border-zinc p-5 group hover:border-red-600/50 transition-all duration-500">
+                <div class="product-card bg-card border border-zinc p-5 group hover:border-red-600 transition-all duration-500" data-name="CAMISA CONCREZ BASIC 003">
                     <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-8">
-                        <img src="CAMISA CONCREZ EYES.jpg" class="product-image w-full h-full object-cover opacity-60">
+                        <img src="CAMISA CONCREZ EYES.jpg" class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-100 transition duration-700">
                     </div>
                     <div class="flex justify-between items-end mb-8">
                         <div>
-                            <p class="text-zinc-500 text-[9px] font-black uppercase mb-1">CAMISA CONCEEZ EYES</p>
-                            <h3 class="font-brand text-xl md:text-2xl uppercase italic">CAMISA CONCREZ EYES</h3>
-                        </div>
-                        <span class="text-red-600 font-black text-2xl">R$ 75,00</span>
-                    </div>
-                    <a href="https://wa.me/5517999999999" target="_blank" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition-all duration-300">Comprar WhatsApp</a>
-                </div>
-
-                <div class="bg-card border border-zinc p-5 group hover:border-red-600/50 transition-all duration-500">
-                    <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-8">
-                        <img src="CAMISA CONCREZ FUCK.png" class="product-image w-full h-full object-cover opacity-60">
-                    </div>
-                    <div class="flex justify-between items-end mb-8">
-                        <div>
-                            <p class="text-zinc-500 text-[9px] font-black uppercase mb-1">CAMISA CONCREZ FUCK</p>
-                            <h3 class="font-brand text-xl md:text-2xl uppercase italic">CAMISA CONCREZ FUCK</h3>
+                            <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 003</p>
+                            <h3 class="font-brand text-xl uppercase italic">CAMISA CONCREZ EYES</h3>
                         </div>
                         <span class="text-red-600 font-black text-2xl">R$ 85,00</span>
                     </div>
-                    <a href="https://wa.me/5517999999999" target="_blank" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition-all duration-300">Comprar WhatsApp</a>
+                    <a href="https://wa.me/5517999999999" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition">Comprar via WhatsApp</a>
+                </div>
+
+                <div class="product-card bg-card border border-zinc p-5 group hover:border-red-600 transition-all duration-500" data-name="CAMISA EYES 004">
+                    <div class="aspect-[3/4] bg-zinc-900 overflow-hidden mb-8">
+                        <img src="CAMISA CONCREZ FUCK.png" class="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-100 transition duration-700">
+                    </div>
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 004</p>
+                            <h3 class="font-brand text-xl uppercase italic">CAMISA CONCREZ FUCK</h3>
+                        </div>
+                        <span class="text-red-600 font-black text-2xl">R$ 110,00</span>
+                    </div>
+                    <a href="https://wa.me/5517999999999" class="block w-full bg-white text-black text-center py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition">Comprar via WhatsApp</a>
                 </div>
 
             </div>
@@ -156,40 +149,54 @@
 
     <section class="py-32 px-6 border-y border-zinc bg-black">
         <div class="max-w-4xl mx-auto">
-            <h2 class="font-brand text-4xl md:text-6xl uppercase italic mb-16 text-red-600 tracking-tighter">O Manifesto</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
+            <h2 class="font-brand text-4xl uppercase italic mb-16 text-red-600">O Manifesto</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div class="space-y-8">
-                    <p class="text-zinc-200 text-sm leading-relaxed uppercase font-black">A CONCREZ prova que a idade é apenas um detalhe quando a visão é clara. Nós temos apenas 14 anos, mas o nosso corre já é maior que o de muito adulto por aí.</p>
-                    <p class="text-zinc-500 text-xs leading-loose uppercase">Saímos do interior para dominar a cena. Cada peça carrega a nossa história e a nossa vontade de vencer. Somos novos, mas a qualidade é de veterano.</p>
+                    <p class="text-zinc-300 text-sm leading-relaxed uppercase font-black">A CONCREZ prova que a idade é apenas um detalhe quando a visão é clara.</p>
+                    <p class="text-zinc-500 text-xs leading-loose uppercase">Nós temos apenas 14 anos, mas o nosso corre já é maior que o de muito adulto por aí. Somos novos, mas somos bons.</p>
                 </div>
                 <div class="border-l border-zinc-800 pl-10 space-y-12">
                     <div>
-                        <h4 class="font-brand text-3xl uppercase italic">JOÃO PEDRO</h4>
-                        <p class="text-red-600 text-[11px] font-black uppercase tracking-[0.4em] mt-2">FUNDADOR & DONO</p>
+                        <h4 class="font-brand text-3xl uppercase italic text-white">JOÃO PEDRO</h4>
+                        <p class="text-red-600 text-[10px] font-black uppercase tracking-[0.3em] mt-2">FUNDADOR & DONO</p>
                     </div>
                     <div>
-                        <h4 class="font-brand text-3xl uppercase italic">GUSTAVO PEREIRA</h4>
-                        <p class="text-red-600 text-[11px] font-black uppercase tracking-[0.4em] mt-2">SÓCIO & SUB-DONO</p>
+                        <h4 class="font-brand text-3xl uppercase italic text-white">GUSTAVO PEREIRA</h4>
+                        <p class="text-red-600 text-[10px] font-black uppercase tracking-[0.3em] mt-2">SÓCIO & SUB-DONO</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-24 text-center border-t border-zinc bg-zinc-950">
-        <p class="font-brand text-zinc-900 text-5xl md:text-9xl mb-8 opacity-20">CONCREZ</p>
-        <p class="text-zinc-600 text-[10px] font-black uppercase tracking-[1em]">CONCREZ WEAR © 2026</p>
+    <footer class="py-20 text-center bg-zinc-950">
+        <p class="text-zinc-800 text-[10px] font-black uppercase tracking-[0.8em]">CONCREZ WEAR © 2026 | JALES-SP</p>
     </footer>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // Pesquisa de Produtos
+        function searchProduct() {
+            let input = document.getElementById('searchInput').value.toUpperCase();
+            let cards = document.getElementsByClassName('product-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let name = cards[i].getAttribute('data-name').toUpperCase();
+                if (name.includes(input)) {
+                    cards[i].style.display = "block";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        // Som e Preloader
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0', width: '0',
                 videoId: 'gyVmdwtvKwg',
-                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': 'gyVmdwtvKwg' },
-                events: { 'onReady': (e) => { e.target.setVolume(100); } }
+                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': 'gyVmdwtvKwg' }
             });
         }
 

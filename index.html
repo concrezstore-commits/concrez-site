@@ -30,9 +30,6 @@
         }
         .size-btn { border: 1px solid #27272a; padding: 12px 20px; font-weight: 900; transition: 0.3s; text-transform: uppercase; }
         .size-btn.active { background-color: #dc2626; border-color: #dc2626; color: white; }
-        
-        /* Barra de Pesquisa */
-        #searchInput::placeholder { color: #27272a; }
     </style>
 </head>
 <body>
@@ -43,7 +40,7 @@
 
     <div id="preloader" onclick="entrarNoSite()">
         <h1 class="font-brand text-6xl md:text-8xl text-red-600 italic">CONCREZ</h1>
-        <p class="mt-4 text-[9px] tracking-[0.5em] text-zinc-600 animate-pulse uppercase text-center px-4">Toque para entrar no corre</p>
+        <p class="mt-4 text-[9px] tracking-[0.5em] text-zinc-600 animate-pulse uppercase">Toque para entrar no corre</p>
     </div>
 
     <nav class="py-6 px-6 border-b border-zinc-900 flex justify-between items-center sticky top-0 bg-black/90 backdrop-blur-md z-50">
@@ -52,73 +49,42 @@
     </nav>
 
     <header class="py-32 px-6 text-center border-b border-zinc-900">
-        <h1 class="font-brand text-6xl md:text-[10rem] uppercase italic leading-[0.85] tracking-tighter mb-10 text-white">
+        <h1 class="font-brand text-6xl md:text-[10rem] uppercase italic leading-[0.85] tracking-tighter mb-10">
             CONCREZ <br> <span class="text-zinc-900">ALWAYS WITH GOD🙏🏼.</span>
         </h1>
-        <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-zinc-500 text-[10px] font-black uppercase tracking-[0.4em]">
-            <span>Jales, SP</span>
-            <span class="hidden md:block">•</span>
-            <span>Brasil</span>
-            <span class="hidden md:block">•</span>
-            <span>Est. 2026</span>
-        </div>
     </header>
-
-    <section class="py-12 px-6 bg-black border-b border-zinc-900">
-        <div class="max-w-2xl mx-auto">
-            <input 
-                type="text" 
-                id="searchInput" 
-                onkeyup="searchProduct()" 
-                placeholder="BUSCAR PEÇA OU CÓDIGO (EX: 001)..." 
-                class="w-full bg-transparent border-b border-zinc-800 py-6 px-4 font-brand text-xl md:text-2xl uppercase italic focus:outline-none focus:border-red-600 transition-all text-white"
-            >
-        </div>
-    </section>
 
     <section class="py-24 px-4 max-w-7xl mx-auto">
         <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
             
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('SCARFACE EDITION', 95, 'CAMISA CONCREZ SCARFACE.jpg')" data-name="SCARFACE EDITION 001">
+            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('SCARFACE EDITION', 95, 'CAMISA CONCREZ SCARFACE.jpg')">
                 <img src="CAMISA CONCREZ SCARFACE.jpg" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
                 <div class="mt-6 flex justify-between items-end">
-                    <div>
-                        <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 001</p>
-                        <h3 class="font-brand text-xl italic uppercase">CAMISA SCARFACE 01</h3>
-                    </div>
+                    <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ SCARFACE</h3>
                     <span class="text-red-600 font-black text-2xl">R$ 95,00</span>
                 </div>
             </div>
 
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('ESSENTIAL BASIC', 65, 'CAMISA CONCREZ BÁSICA.jpg')" data-name="ESSENTIAL BASIC 002">
+            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('ESSENTIAL BASIC', 65, 'CAMISA CONCREZ BÁSICA.jpg')">
                 <img src="CAMISA CONCREZ BÁSICA.jpg" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
                 <div class="mt-6 flex justify-between items-end">
-                    <div>
-                        <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 002</p>
-                        <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ BASIC</h3>
-                    </div>
+                    <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ BASIC</h3>
                     <span class="text-red-600 font-black text-2xl">R$ 65,00</span>
                 </div>
             </div>
 
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('OVERSIZED LOGO', 110, 'CAMISA CONCREZ EYES.jpg')" data-name="OVERSIZED LOGO 003">
-                <div class="w-full aspect-[3/4] bg-zinc-900 flex items-center justify-center text-zinc-700 font-brand italic">CAMISA CONCREZ EYES.jpg</div>
+            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('EYES EDITION', 85, 'CAMISA CONCREZ EYES.jpg')">
+                <img src="CAMISA CONCREZ EYES.jpg" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
                 <div class="mt-6 flex justify-between items-end">
-                    <div>
-                        <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 003</p>
-                        <h3 class="font-brand text-xl italic uppercase">CAMISA EYES01</h3>
-                    </div>
+                    <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ EYES</h3>
                     <span class="text-red-600 font-black text-2xl">R$ 85,00</span>
                 </div>
             </div>
 
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('JALES CITY SPECIAL', 85, 'CAMISA CONCREZ FUCK.png')" data-name="JALES CITY SPECIAL 004">
-                <div class="w-full aspect-[3/4] bg-zinc-900 flex items-center justify-center text-zinc-700 font-brand italic">CAMISA CONCREZ FUCK.png</div>
+            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('CONCREZ FUCK', 99, 'CAMISA CONCREZ FUCK.png')">
+                <img src="CAMISA CONCREZ FUCK.png" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
                 <div class="mt-6 flex justify-between items-end">
-                    <div>
-                        <p class="text-zinc-600 text-[9px] font-black uppercase mb-1">Ref: 004</p>
-                        <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ FUCK</h3>
-                    </div>
+                    <h3 class="font-brand text-xl italic uppercase">CONCREZ CONCREZ FUCK</h3>
                     <span class="text-red-600 font-black text-2xl">R$ 99,00</span>
                 </div>
             </div>
@@ -127,22 +93,17 @@
     </section>
 
     <section class="py-32 px-6 border-y border-zinc-900 bg-black">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="font-brand text-4xl md:text-6xl uppercase italic mb-16 text-red-600 tracking-tighter">O Manifesto</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-                <div class="space-y-8">
-                    <p class="text-zinc-200 text-sm leading-relaxed uppercase font-black">A CONCREZ prova que a idade é apenas um detalhe quando a visão é clara. Nós temos apenas 14 anos, mas o nossa determinação já é maior que o de muito adulto por aí.</p>
-                    <p class="text-zinc-500 text-xs leading-loose uppercase italic">"Sempre com Deus guiando cada passo da nossa jornada."</p>
+        <div class="max-w-4xl mx-auto text-center md:text-left">
+            <h2 class="font-brand text-4xl md:text-6xl uppercase italic mb-10 text-red-600">O Manifesto</h2>
+            <p class="text-zinc-200 text-lg uppercase font-black mb-10">Temos 14 anos, mas a nossa determinação já é maior que o de muito adulto por aí. Sempre com Deus guiando cada passo.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-zinc-800 pt-10">
+                <div>
+                    <h4 class="font-brand text-2xl italic">JOÃO PEDRO</h4>
+                    <p class="text-red-600 text-[10px] font-black uppercase">Fundador & Dono</p>
                 </div>
-                <div class="border-l border-zinc-800 pl-10 space-y-12">
-                    <div>
-                        <h4 class="font-brand text-3xl uppercase italic">JOÃO PEDRO</h4>
-                        <p class="text-red-600 text-[11px] font-black uppercase tracking-[0.4em] mt-2">FUNDADOR & DONO</p>
-                    </div>
-                    <div>
-                        <h4 class="font-brand text-3xl uppercase italic">GUSTAVO PEREIRA</h4>
-                        <p class="text-red-600 text-[11px] font-black uppercase tracking-[0.4em] mt-2">SÓCIO & SUB-DONO</p>
-                    </div>
+                <div>
+                    <h4 class="font-brand text-2xl italic">GUSTAVO PEREIRA</h4>
+                    <p class="text-red-600 text-[10px] font-black uppercase">Sócio & Sub-Dono</p>
                 </div>
             </div>
         </div>
@@ -150,37 +111,27 @@
 
     <div id="productModal">
         <div class="bg-zinc-950 border border-zinc-800 w-full max-w-4xl p-6 md:p-10 relative rounded-lg overflow-y-auto max-h-[90vh]">
-            <button onclick="closeModal()" class="absolute top-5 right-5 text-white text-2xl font-black">✕</button>
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-white text-2xl">✕</button>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <img id="modalImg" src="" class="w-full aspect-[3/4] object-cover border border-zinc-900 shadow-2xl">
+                <img id="modalImg" src="" class="w-full aspect-[3/4] object-cover border border-zinc-900">
                 <div>
-                    <h2 id="modalTitle" class="font-brand text-3xl italic mb-4 text-white uppercase tracking-tighter"></h2>
+                    <h2 id="modalTitle" class="font-brand text-3xl italic mb-4"></h2>
                     <p id="modalPrice" class="text-red-600 font-black text-3xl mb-8"></p>
-                    
-                    <p class="text-[10px] font-black uppercase text-zinc-500 mb-4 tracking-widest">Selecione o Tamanho:</p>
-                    <div class="flex gap-3 mb-10">
+                    <div class="flex gap-3 mb-8">
                         <button onclick="setSize('P', this)" class="size-btn">P</button>
                         <button onclick="setSize('M', this)" class="size-btn">M</button>
                         <button onclick="setSize('G', this)" class="size-btn">G</button>
                     </div>
-
-                    <div class="bg-zinc-900 p-6 rounded border border-zinc-800 mb-8">
-                        <p class="text-[10px] font-black uppercase mb-4 text-white">Calcular Frete:</p>
-                        <div class="flex gap-2">
-                            <input type="text" id="cepInput" placeholder="DIGITE SEU CEP" class="bg-black border border-zinc-700 p-4 w-full text-xs outline-none focus:border-red-600 transition-all font-bold text-white">
-                            <button onclick="calcFrete()" class="bg-white text-black px-6 font-black text-[10px] uppercase">Calcular</button>
-                        </div>
-                        <p id="freteInfo" class="mt-4 text-green-500 text-[11px] font-black hidden uppercase tracking-wider"></p>
-                    </div>
-
-                    <button onclick="buyWhatsApp()" class="w-full bg-white text-black py-5 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition duration-500 shadow-lg">Finalizar no WhatsApp</button>
+                    <input type="text" id="cepInput" placeholder="CEP PARA FRETE" class="w-full bg-black border border-zinc-800 p-4 mb-4 text-white outline-none focus:border-red-600">
+                    <button onclick="calcFrete()" class="w-full bg-zinc-900 py-2 text-[10px] font-black mb-6">CALCULAR FRETE</button>
+                    <p id="freteInfo" class="text-green-500 font-bold mb-6 hidden"></p>
+                    <button onclick="buyWhatsApp()" class="w-full bg-white text-black py-5 font-black uppercase hover:bg-red-600 hover:text-white transition">Comprar no WhatsApp</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="py-24 text-center border-t border-zinc-900 bg-zinc-950">
-        <p class="font-brand text-zinc-900 text-5xl md:text-[10rem] mb-8 opacity-20">CONCREZ</p>
+    <footer class="py-20 text-center border-t border-zinc-900 bg-zinc-950">
         <p class="text-zinc-600 text-[10px] font-black uppercase tracking-[1em]">CONCREZ WEAR © 2026 | JALES-SP</p>
     </footer>
 
@@ -188,23 +139,11 @@
     <script>
         let pName = ""; let pPrice = 0; let pSize = ""; let pFrete = 0;
 
-        // Entrar no site
         function entrarNoSite() {
             document.getElementById('preloader').classList.add('loader-hidden');
-            if(player && player.playVideo) { player.playVideo(); }
+            if(player && player.playVideo) player.playVideo();
         }
 
-        // Pesquisa
-        function searchProduct() {
-            let input = document.getElementById('searchInput').value.toUpperCase();
-            let cards = document.getElementsByClassName('product-card');
-            for (let i = 0; i < cards.length; i++) {
-                let name = cards[i].getAttribute('data-name').toUpperCase();
-                cards[i].style.display = name.includes(input) ? "block" : "none";
-            }
-        }
-
-        // Modal Funções
         function openModal(name, price, img) {
             pName = name; pPrice = price;
             document.getElementById('modalTitle').innerText = name;
@@ -217,9 +156,6 @@
         function closeModal() {
             document.getElementById('productModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-            pSize = ""; pFrete = 0;
-            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('freteInfo').classList.add('hidden');
         }
 
         function setSize(size, btn) {
@@ -230,21 +166,17 @@
 
         function calcFrete() {
             const cep = document.getElementById('cepInput').value;
-            if(cep.length < 5) return;
             pFrete = (cep.startsWith('15')) ? 15 : 35;
-            const info = document.getElementById('freteInfo');
-            info.innerText = `VALOR DO FRETE: R$ ${pFrete},00 | ENTREGA ESTIMADA: 5 DIAS`;
-            info.classList.remove('hidden');
+            document.getElementById('freteInfo').innerText = "FRETE: R$ " + pFrete + ",00";
+            document.getElementById('freteInfo').classList.remove('hidden');
         }
 
         function buyWhatsApp() {
-            if(!pSize) return alert("Por favor, selecione um tamanho antes de finalizar!");
-            const total = pPrice + pFrete;
-            const link = `https://wa.me/5517999999999?text=Salve%20Concrez!%20Quero%20a%20peça:%20${pName}%20(Tamanho%20${pSize}).%20Total%20com%20frete:%20R$%20${total},00`;
+            if(!pSize) return alert("Selecione o tamanho!");
+            const link = `https://wa.me/5517999999999?text=Salve%20Concrez!%20Quero%20a%20${pName}%20Tam%20${pSize}.%20Total:%20R$%20${pPrice + pFrete}`;
             window.open(link, '_blank');
         }
 
-        // YouTube Audio
         let player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', { height: '0', width: '0', videoId: 'gyVmdwtvKwg',
@@ -253,4 +185,5 @@
         }
     </script>
 </body>
-</html>
+                </html>
+                

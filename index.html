@@ -3,147 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONCREZ | Streetwear</title>
+    <title>CONCREZ | Sound & Wear Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap');
         
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
-        .font-brand { font-family: 'Archivo Black', sans-serif; }
-        .bg-card { background-color: #09090b; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        .font-hype { font-family: 'Archivo Black', sans-serif; }
+
+        /* --- SISTEMA DE BLUR (EMBAÇADO) --- */
+        #main-content { transition: filter 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
+        .site-blur { filter: blur(30px); pointer-events: none; }
 
         /* --- PRELOADER --- */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; z-index: 9999;
-            cursor: pointer; opacity: 1; visibility: visible;
-            transition: opacity 0.5s ease, visibility 0.5s;
+            justify-content: center; align-items: center; z-index: 10000;
+            cursor: pointer; transition: 0.8s;
         }
         .loader-hidden { opacity: 0 !important; visibility: hidden !important; }
 
-        /* MODAL */
+        /* --- PERGUNTA DA MÚSICA --- */
+        #music-prompt {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 9999; background: #0a0a0a; border: 1px solid #18181b;
+            padding: 40px; text-align: center; display: none; width: 90%; max-width: 450px;
+            box-shadow: 0 0 100px rgba(220, 38, 38, 0.15);
+        }
+
+        /* --- PLAYER HUD --- */
+        #music-hub {
+            position: fixed; bottom: 30px; left: 30px; z-index: 100;
+            background: rgba(0,0,0,0.9); border: 1px solid #18181b;
+            padding: 15px; display: none; flex-direction: column; gap: 10px;
+            backdrop-filter: blur(10px); min-width: 180px;
+        }
+        .m-btn { background: #dc2626; color: #fff; font-size: 9px; font-weight: 900; padding: 8px 15px; text-transform: uppercase; transition: 0.3s; }
+        .m-btn:hover { background: #fff; color: #000; }
+
+        /* --- NAVEGAÇÃO & MODAL --- */
+        #nav-menu { display: none; position: absolute; top: 100%; left: 0; background: #000; border: 1px solid #18181b; min-width: 200px; z-index: 1000; }
+        #nav-menu a { display: block; padding: 18px 24px; font-size: 11px; font-weight: 900; text-transform: uppercase; border-bottom: 1px solid #111; transition: 0.3s; }
+        #nav-menu a:hover { background: #dc2626; transform: translateX(5px); }
+
         #productModal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.98); z-index: 1000;
-            justify-content: center; align-items: center; padding: 20px;
+            background: rgba(0, 0, 0, 0.98); z-index: 9999;
+            justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(10px);
         }
-        .size-btn { border: 1px solid #27272a; padding: 12px 20px; font-weight: 900; transition: 0.3s; text-transform: uppercase; }
+        .size-btn { border: 1px solid #27272a; padding: 15px; font-weight: 900; transition: 0.3s; width: 100%; text-align: center; }
         .size-btn.active { background-color: #dc2626; border-color: #dc2626; color: white; }
     </style>
 </head>
-<body>
+<body id="inicio">
 
-    <div style="position: absolute; width: 1px; height: 1px; overflow: hidden;">
-        <div id="player"></div>
-    </div>
+    <div style="position: absolute; width: 1px; height: 1px; overflow: hidden;"><div id="player"></div></div>
 
     <div id="preloader" onclick="entrarNoSite()">
-        <h1 class="font-brand text-6xl md:text-8xl text-red-600 italic">CONCREZ</h1>
-        <p class="mt-4 text-[9px] tracking-[0.5em] text-zinc-600 animate-pulse uppercase">Toque para entrar no corre</p>
+        <h1 class="font-hype text-6xl md:text-9xl text-red-600 italic uppercase tracking-tighter">CONCREZ</h1>
+        <p class="mt-8 text-[9px] tracking-[0.8em] font-black text-zinc-700 animate-pulse uppercase">Always with God.</p>
     </div>
 
-    <nav class="py-6 px-6 border-b border-zinc-900 flex justify-between items-center sticky top-0 bg-black/90 backdrop-blur-md z-50">
-        <span class="font-brand text-2xl italic text-red-600">CONCREZ</span>
-        <a href="https://www.instagram.com/concrez.br?igsh=NjI5czdoODRpenJ3" target="_blank" class="text-[10px] font-black uppercase border border-white px-5 py-2.5 hover:bg-white hover:text-black transition duration-300">Instagram</a>
-    </nav>
-
-    <header class="py-32 px-6 text-center border-b border-zinc-900">
-        <h1 class="font-brand text-6xl md:text-[10rem] uppercase italic leading-[0.85] tracking-tighter mb-10">
-            CONCREZ <br> <span class="text-zinc-900">ALWAYS WITH GOD🙏🏼.</span>
-        </h1>
-    </header>
-
-    <section class="py-24 px-4 max-w-7xl mx-auto">
-        <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('SCARFACE EDITION', 95, 'CAMISA CONCREZ SCARFACE.jpg')">
-                <img src="CAMISA CONCREZ SCARFACE.jpg" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
-                <div class="mt-6 flex justify-between items-end">
-                    <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ SCARFACE</h3>
-                    <span class="text-red-600 font-black text-2xl">R$ 95,00</span>
-                </div>
-            </div>
-
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('ESSENTIAL BASIC', 65, 'CAMISA CONCREZ BÁSICA.jpg')">
-                <img src="CAMISA CONCREZ BÁSICA.jpg" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
-                <div class="mt-6 flex justify-between items-end">
-                    <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ BASIC</h3>
-                    <span class="text-red-600 font-black text-2xl">R$ 65,00</span>
-                </div>
-            </div>
-
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('EYES EDITION', 85, 'CAMISA CONCREZ EYES.jpg')">
-                <img src="CAMISA CONCREZ EYES.jpg" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
-                <div class="mt-6 flex justify-between items-end">
-                    <h3 class="font-brand text-xl italic uppercase">CAMISA CONCREZ EYES</h3>
-                    <span class="text-red-600 font-black text-2xl">R$ 85,00</span>
-                </div>
-            </div>
-
-            <div class="product-card bg-card border border-zinc-900 p-5 group cursor-pointer" onclick="openModal('CONCREZ FUCK', 99, 'CAMISA CONCREZ FUCK.png')">
-                <img src="CAMISA CONCREZ FUCK.png" class="w-full aspect-[3/4] object-cover opacity-60 group-hover:opacity-100 transition duration-500">
-                <div class="mt-6 flex justify-between items-end">
-                    <h3 class="font-brand text-xl italic uppercase">CONCREZ CONCREZ FUCK</h3>
-                    <span class="text-red-600 font-black text-2xl">R$ 99,00</span>
-                </div>
-            </div>
-
+    <div id="music-prompt">
+        <h2 class="font-hype text-2xl italic mb-8 uppercase text-white">ATIVAR EXPERIÊNCIA SONORA?</h2>
+        <div class="flex gap-4">
+            <button onclick="decisaoMusica(true)" class="flex-1 bg-white text-black py-5 font-black text-xs uppercase hover:bg-red-600 hover:text-white transition">SIM</button>
+            <button onclick="decisaoMusica(false)" class="flex-1 border border-zinc-800 py-5 font-black text-xs uppercase hover:bg-zinc-900 transition text-zinc-500">NÃO</button>
         </div>
-    </section>
+    </div>
 
-    <section class="py-32 px-6 border-y border-zinc-900 bg-black">
-        <div class="max-w-4xl mx-auto text-center md:text-left">
-            <h2 class="font-brand text-4xl md:text-6xl uppercase italic mb-10 text-red-600">O Manifesto</h2>
-            <p class="text-zinc-200 text-lg uppercase font-black mb-10">Temos 14 anos, mas a nossa determinação já é maior que o de muito adulto por aí. Sempre com Deus guiando cada passo.</p>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-zinc-800 pt-10">
-                <div>
-                    <h4 class="font-brand text-2xl italic">JOÃO PEDRO</h4>
-                    <p class="text-red-600 text-[10px] font-black uppercase">Fundador & Dono</p>
-                </div>
-                <div>
-                    <h4 class="font-brand text-2xl italic">GUSTAVO PEREIRA</h4>
-                    <p class="text-red-600 text-[10px] font-black uppercase">Sócio & Sub-Dono</p>
+    <div id="music-hub">
+        <span id="track-name" class="text-[9px] font-black uppercase text-zinc-500 tracking-[0.2em] mb-2">Off</span>
+        <div class="flex gap-2">
+            <button onclick="prevTrack()" class="m-btn">Prev</button>
+            <button onclick="togglePlay()" id="play-pause-btn" class="m-btn">Play</button>
+            <button onclick="nextTrack()" class="m-btn">Next</button>
+        </div>
+    </div>
+
+    <div id="main-content" class="site-blur">
+        
+        <nav class="py-6 px-10 border-b border-zinc-900 flex justify-between items-center sticky top-0 bg-black/95 backdrop-blur-md z-50">
+            <div class="relative">
+                <button onclick="toggleMenu()" class="font-hype text-4xl italic text-red-600 uppercase tracking-tighter transition hover:scale-105">CONCREZ</button>
+                <div id="nav-menu">
+                    <a href="#inicio" onclick="toggleMenu()">/ Home</a>
+                    <a href="#catalogo" onclick="toggleMenu()">/ Catálogo 2026</a>
+                    <a href="#creditos" onclick="toggleMenu()">/ Manifesto</a>
                 </div>
             </div>
-        </div>
-    </section>
+            <a href="https://www.instagram.com/concrez.br" target="_blank" class="text-[10px] font-black uppercase border border-white px-6 py-3 hover:bg-white hover:text-black transition">IG: @CONCREZ.BR</a>
+        </nav>
+
+        <header class="py-48 px-6 text-center border-b border-zinc-900">
+            <h1 class="font-hype text-7xl md:text-[14rem] uppercase italic leading-[0.85] tracking-tighter mb-16 text-white">
+                CONCREZ <br> <span class="text-zinc-950">ALWAYS WITH GOD.</span>
+            </h1>
+            <p class="text-[5rem] animate-bounce">🙏</p>
+        </header>
+
+        <section id="catalogo" class="py-32 px-4 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <div class="bg-black border border-zinc-900 p-8 cursor-pointer group hover:border-red-600 transition duration-500" onclick="openModal('SCARFACE EDITION', 95, 'CAMISA CONCREZ SCARFACE.jpg')">
+                    <img src="CAMISA CONCREZ SCARFACE.jpg" class="w-full aspect-[3/4] object-cover opacity-70 group-hover:opacity-100 transition duration-700">
+                    <div class="mt-10 flex justify-between items-end border-t border-zinc-900 pt-8">
+                        <h3 class="font-hype text-2xl italic uppercase text-white tracking-tight">SCARFACE EDITION</h3>
+                        <span class="text-red-600 font-black text-3xl">R$ 95</span>
+                    </div>
+                </div>
+
+                <div class="bg-black border border-zinc-900 p-8 cursor-pointer group hover:border-red-600 transition duration-500" onclick="openModal('ESSENTIAL BASIC', 65, 'CAMISA CONCREZ BÁSICA.jpg')">
+                    <img src="CAMISA CONCREZ BÁSICA.jpg" class="w-full aspect-[3/4] object-cover opacity-70 group-hover:opacity-100 transition duration-700">
+                    <div class="mt-10 flex justify-between items-end border-t border-zinc-900 pt-8">
+                        <h3 class="font-hype text-2xl italic uppercase text-white tracking-tight">ESSENTIAL BASIC</h3>
+                        <span class="text-red-600 font-black text-3xl">R$ 65</span>
+                    </div>
+                </div>
+
+                <div class="bg-black border border-zinc-900 p-8 cursor-pointer group hover:border-red-600 transition duration-500" onclick="openModal('EYES EDITION', 85, 'CAMISA CONCREZ EYES.jpg')">
+                    <img src="CAMISA CONCREZ EYES.jpg" class="w-full aspect-[3/4] object-cover opacity-70 group-hover:opacity-100 transition duration-700">
+                    <div class="mt-10 flex justify-between items-end border-t border-zinc-900 pt-8">
+                        <h3 class="font-hype text-2xl italic uppercase text-white tracking-tight">EYES EDITION</h3>
+                        <span class="text-red-600 font-black text-3xl">R$ 85</span>
+                    </div>
+                </div>
+
+                <div class="bg-black border border-zinc-900 p-8 cursor-pointer group hover:border-red-600 transition duration-500" onclick="openModal('CONCREZ FUCK', 99, 'CAMISA CONCREZ FUCK.png')">
+                    <img src="CAMISA CONCREZ FUCK.png" class="w-full aspect-[3/4] object-cover opacity-70 group-hover:opacity-100 transition duration-700">
+                    <div class="mt-10 flex justify-between items-end border-t border-zinc-900 pt-8">
+                        <h3 class="font-hype text-2xl italic uppercase text-white tracking-tight">CONCREZ FUCK</h3>
+                        <span class="text-red-600 font-black text-3xl">R$ 99</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="creditos" class="py-40 px-10 border-y border-zinc-900 bg-zinc-950">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="font-hype text-6xl text-red-600 italic uppercase mb-12">O Manifesto</h2>
+                    <p class="text-zinc-200 text-xl font-black uppercase leading-relaxed mb-8">Nós temos apenas 14 anos, mas o nosso corre já é maior que o de muito adulto por aí.</p>
+                    <p class="text-zinc-600 font-hype text-sm uppercase italic">"Sempre com Deus guiando cada passo."</p>
+                </div>
+                <div class="space-y-12 md:border-l border-zinc-800 md:pl-20">
+                    <div>
+                        <h4 class="font-hype text-4xl uppercase italic text-white">JOÃO PEDRO</h4>
+                        <p class="text-red-600 text-[10px] font-black uppercase mt-2 tracking-[0.4em]">FUNDADOR & DONO</p>
+                    </div>
+                    <div>
+                        <h4 class="font-hype text-4xl uppercase italic text-white">GUSTAVO PEREIRA</h4>
+                        <p class="text-red-600 text-[10px] font-black uppercase mt-2 tracking-[0.4em]">SÓCIO & SUB-DONO</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-20 text-center border-t border-zinc-900 bg-black">
+            <p class="text-zinc-600 text-[10px] font-black uppercase tracking-[1em]">CONCREZ WEAR © 2026 | JALES-SP</p>
+        </footer>
+    </div>
 
     <div id="productModal">
-        <div class="bg-zinc-950 border border-zinc-800 w-full max-w-4xl p-6 md:p-10 relative rounded-lg overflow-y-auto max-h-[90vh]">
-            <button onclick="closeModal()" class="absolute top-5 right-5 text-white text-2xl">✕</button>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <img id="modalImg" src="" class="w-full aspect-[3/4] object-cover border border-zinc-900">
+        <div class="bg-zinc-950 border border-zinc-800 w-full max-w-5xl p-8 md:p-12 relative rounded-md overflow-y-auto max-h-[95vh]">
+            <button onclick="closeModal()" class="absolute top-6 right-8 text-white text-3xl font-black hover:text-red-600 transition">✕</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <img id="modalImg" src="" class="w-full aspect-[3/4] object-cover border border-zinc-900 shadow-2xl">
                 <div>
-                    <h2 id="modalTitle" class="font-brand text-3xl italic mb-4"></h2>
-                    <p id="modalPrice" class="text-red-600 font-black text-3xl mb-8"></p>
-                    <div class="flex gap-3 mb-8">
-                        <button onclick="setSize('P', this)" class="size-btn">P</button>
-                        <button onclick="setSize('M', this)" class="size-btn">M</button>
-                        <button onclick="setSize('G', this)" class="size-btn">G</button>
+                    <h2 id="modalTitle" class="font-hype text-4xl italic mb-6 text-white uppercase tracking-tight"></h2>
+                    <p id="modalPrice" class="text-red-600 font-black text-4xl mb-12"></p>
+                    
+                    <div class="mb-10">
+                        <p class="text-[11px] font-black uppercase text-zinc-500 mb-6 tracking-widest">Tamanho:</p>
+                        <div class="flex gap-4">
+                            <button onclick="setSize('P', this)" class="size-btn">P</button>
+                            <button onclick="setSize('M', this)" class="size-btn">M</button>
+                            <button onclick="setSize('G', this)" class="size-btn">G</button>
+                        </div>
                     </div>
-                    <input type="text" id="cepInput" placeholder="CEP PARA FRETE" class="w-full bg-black border border-zinc-800 p-4 mb-4 text-white outline-none focus:border-red-600">
-                    <button onclick="calcFrete()" class="w-full bg-zinc-900 py-2 text-[10px] font-black mb-6">CALCULAR FRETE</button>
-                    <p id="freteInfo" class="text-green-500 font-bold mb-6 hidden"></p>
-                    <button onclick="buyWhatsApp()" class="w-full bg-white text-black py-5 font-black uppercase hover:bg-red-600 hover:text-white transition">Comprar no WhatsApp</button>
+
+                    <div class="bg-black p-8 rounded border border-zinc-900 mb-10">
+                        <input type="text" id="cepInput" placeholder="DIGITE SEU CEP" class="bg-transparent border-b-2 border-zinc-800 p-4 w-full text-sm outline-none focus:border-red-600 transition-all font-bold text-white mb-6 font-hype">
+                        <button onclick="calcFrete()" class="bg-zinc-900 hover:bg-white hover:text-black text-white w-full py-4 font-black text-[10px] uppercase transition">Calcular Frete</button>
+                        <p id="freteInfo" class="mt-6 text-green-500 text-[11px] font-black hidden uppercase text-center"></p>
+                    </div>
+
+                    <button onclick="buyWhatsApp()" class="w-full bg-white text-black py-6 font-black uppercase text-xs hover:bg-red-600 hover:text-white transition duration-500 shadow-xl">Comprar no WhatsApp</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <footer class="py-20 text-center border-t border-zinc-900 bg-zinc-950">
-        <p class="text-zinc-600 text-[10px] font-black uppercase tracking-[1em]">CONCREZ WEAR © 2026 | JALES-SP</p>
-    </footer>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
+        // PLAYLIST
+        let playlist = [
+            { id: 'BUL7zecHZjA', name: '01. GORILA ROXO - MATUÊ' },
+            { id: 'mV4cWyl7zYU', name: '02. GROUPIES - TETO' },
+            { id: 'm226f2reF28', name: '03. ANOS LUZ - MATUÊ' }
+        ];
+        let currentTrack = 0; let isPlaying = false; let player;
         let pName = ""; let pPrice = 0; let pSize = ""; let pFrete = 0;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', { height: '0', width: '0', videoId: playlist[currentTrack].id, events: { 'onStateChange': onPlayerStateChange } });
+        }
 
         function entrarNoSite() {
             document.getElementById('preloader').classList.add('loader-hidden');
-            if(player && player.playVideo) player.playVideo();
+            setTimeout(() => { document.getElementById('music-prompt').style.display = 'block'; }, 600);
         }
 
+        function decisaoMusica(querMusica) {
+            document.getElementById('music-prompt').style.display = 'none';
+            document.getElementById('main-content').classList.remove('site-blur');
+            document.getElementById('music-hub').style.display = 'flex';
+            if(querMusica) { togglePlay(); }
+        }
+
+        function togglePlay() {
+            if (!isPlaying) { player.playVideo(); document.getElementById('play-pause-btn').innerText = 'Pause'; document.getElementById('track-name').innerText = playlist[currentTrack].name; }
+            else { player.pauseVideo(); document.getElementById('play-pause-btn').innerText = 'Play'; }
+            isPlaying = !isPlaying;
+        }
+
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % playlist.length;
+            player.loadVideoById(playlist[currentTrack].id);
+            document.getElementById('track-name').innerText = playlist[currentTrack].name;
+            isPlaying = true; document.getElementById('play-pause-btn').innerText = 'Pause';
+        }
+
+        function prevTrack() {
+            currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+            player.loadVideoById(playlist[currentTrack].id);
+            document.getElementById('track-name').innerText = playlist[currentTrack].name;
+            isPlaying = true; document.getElementById('play-pause-btn').innerText = 'Pause';
+        }
+
+        function onPlayerStateChange(event) { if (event.data === YT.PlayerState.ENDED) nextTrack(); }
+
+        // COMPRA & MODAL
         function openModal(name, price, img) {
             pName = name; pPrice = price;
             document.getElementById('modalTitle').innerText = name;
@@ -156,6 +256,8 @@
         function closeModal() {
             document.getElementById('productModal').style.display = 'none';
             document.body.style.overflow = 'auto';
+            pSize = ""; document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('freteInfo').classList.add('hidden');
         }
 
         function setSize(size, btn) {
@@ -167,23 +269,22 @@
         function calcFrete() {
             const cep = document.getElementById('cepInput').value;
             pFrete = (cep.startsWith('15')) ? 15 : 35;
-            document.getElementById('freteInfo').innerText = "FRETE: R$ " + pFrete + ",00";
-            document.getElementById('freteInfo').classList.remove('hidden');
+            const info = document.getElementById('freteInfo');
+            info.innerText = `FRETE: R$ ${pFrete},00 | ENTREGA EM 5 DIAS`;
+            info.classList.remove('hidden');
         }
 
         function buyWhatsApp() {
-            if(!pSize) return alert("Selecione o tamanho!");
-            const link = `https://wa.me/5517999999999?text=Salve%20Concrez!%20Quero%20a%20${pName}%20Tam%20${pSize}.%20Total:%20R$%20${pPrice + pFrete}`;
+            if(!pSize) return alert("SELECIONE O TAMANHO!");
+            const total = pPrice + pFrete;
+            const link = `https://wa.me/5517999999999?text=CONCREZ%20DROPS:%20Quero%20a%20${pName}%20Tam%20${pSize}.%20Total%20R$%20${total}`;
             window.open(link, '_blank');
         }
 
-        let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', { height: '0', width: '0', videoId: 'gyVmdwtvKwg',
-                playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'gyVmdwtvKwg' }
-            });
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
     </script>
 </body>
-                </html>
-                
+</html>

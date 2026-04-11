@@ -13,100 +13,161 @@
         .site-blur { filter: blur(30px); pointer-events: none; }
         #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; cursor: pointer; transition: 0.8s; }
         .loader-hidden { opacity: 0 !important; visibility: hidden !important; }
+        .product-card { background: #09090b; border: 1px solid #18181b; transition: 0.4s; }
+        .product-card:hover { border-color: #dc2626; transform: translateY(-5px); }
         #productModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.98); z-index: 9999; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(10px); }
-        .size-btn { border: 1px solid #27272a; padding: 15px; font-weight: 900; transition: 0.3s; width: 100%; text-align: center; }
+        .size-btn { border: 1px solid #27272a; padding: 15px; font-weight: 900; transition: 0.3s; width: 100%; text-align: center; cursor: pointer; }
         .size-btn.active { background-color: #dc2626; border-color: #dc2626; color: white; }
     </style>
 </head>
 <body id="inicio">
 
     <div id="preloader" onclick="entrarNoSite()">
-        <h1 class="font-hype text-6xl md:text-9xl text-red-600 italic uppercase tracking-tighter">CONCREZ</h1>
-        <p class="mt-8 text-[9px] tracking-[0.8em] font-black text-zinc-700 animate-pulse uppercase">Always with God.</p>
+        <h1 class="font-hype text-6xl md:text-9xl text-red-600 italic uppercase tracking-tighter animate-pulse">CONCREZ</h1>
+        <p class="mt-8 text-[9px] tracking-[0.8em] font-black text-zinc-700 uppercase">TOQUE PARA ENTRAR</p>
     </div>
 
     <div id="main-content" class="site-blur">
-        <nav class="py-6 px-10 border-b border-zinc-900 flex justify-between items-center sticky top-0 bg-black/95 backdrop-blur-md z-50">
-            <button class="font-hype text-4xl italic text-red-600 uppercase tracking-tighter">CONCREZ</button>
-            <a href="https://www.instagram.com/concrez.br" target="_blank" class="text-[10px] font-black uppercase border border-white px-6 py-3 hover:bg-white hover:text-black transition">IG: @CONCREZ.BR</a>
+        <nav class="py-6 px-6 border-b border-zinc-900 flex justify-between items-center sticky top-0 bg-black/95 backdrop-blur-md z-50">
+            <div class="font-hype text-3xl italic text-red-600 uppercase tracking-tighter">CONCREZ</div>
+            <a href="https://www.instagram.com/concrez.br" target="_blank" class="text-[9px] font-black uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition">@CONCREZ.BR</a>
         </nav>
 
-        <section id="votacao" class="py-24 px-4 bg-zinc-950 border-b border-zinc-900">
-            <div class="max-w-5xl mx-auto text-center">
-                <h2 class="font-hype text-5xl text-red-600 italic mb-4 uppercase">VOTE NO PRÓXIMO DROP</h2>
-                <p class="text-zinc-500 font-black text-[10px] tracking-[0.4em] mb-12 uppercase">ESCOLHA ATÉ 2 PEÇAS QUE VOCÊ QUER PRIMEIRO</p>
+        <section class="py-12 px-6 border-b border-zinc-900 bg-zinc-950">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="text-[9px] font-black text-zinc-500 tracking-[0.5em] mb-4 uppercase">Sound Experience</p>
+                <h2 id="current-track-name" class="font-hype text-2xl italic mb-6">GORILA ROXO - MATUÊ</h2>
                 
+                <div id="youtube-player" style="display:none"></div>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="playTrack('BUL7zecHZjA', 'GORILA ROXO - MATUÊ')" class="bg-white text-black px-6 py-3 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Gorila Roxo</button>
+                    <button onclick="playTrack('m226f2reF28', 'ANOS LUZ - MATUÊ')" class="bg-white text-black px-6 py-3 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Anos Luz</button>
+                    <button onclick="playTrack('mV4cWyl7zYU', 'GROUPIES - MATUÊ')" class="bg-white text-black px-6 py-3 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Groupies</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-6">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="product-card p-6 text-center">
+                    <div class="bg-zinc-900 aspect-square mb-6 flex items-center justify-center font-hype text-zinc-800 text-4xl italic uppercase border border-zinc-800">Scarface V1</div>
+                    <h3 class="font-hype text-2xl mb-2">SCARFACE V1 BLACK</h3>
+                    <p class="text-red-600 font-black text-2xl mb-6">R$ 129,90</p>
+                    <button onclick="openModal('Scarface V1 Black', '129,90')" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Comprar</button>
+                </div>
+                <div class="product-card p-6 text-center">
+                    <div class="bg-zinc-900 aspect-square mb-6 flex items-center justify-center font-hype text-zinc-800 text-4xl italic uppercase border border-zinc-800">Faith Design</div>
+                    <h3 class="font-hype text-2xl mb-2">FAITH MINIMALIST</h3>
+                    <p class="text-red-600 font-black text-2xl mb-6">R$ 139,90</p>
+                    <button onclick="openModal('Faith Minimalist', '139,90')" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Comprar</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 px-6 bg-zinc-950 border-t border-zinc-900">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-hype text-4xl italic mb-12">VOTE NO PRÓXIMO DROP</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-black border border-zinc-800 p-8 rounded hover:border-red-600 transition">
-                        <h3 class="font-hype text-xl mb-4 italic uppercase">SCARFACE V2</h3>
-                        <p class="text-white text-5xl font-black mb-6" id="votos-scarface">0</p>
-                        <button onclick="votar('scarface')" id="btn-scarface" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">VOTAR</button>
+                    <div class="bg-black border border-zinc-800 p-6 rounded">
+                        <h3 class="font-hype text-sm mb-4">GHOST EDITION</h3>
+                        <p id="votos-ghost" class="text-red-600 text-5xl font-black mb-6">0</p>
+                        <button onclick="votar('ghost')" id="btn-ghost" class="w-full bg-white text-black py-3 font-black text-[9px] uppercase hover:bg-red-600 transition">VOTAR</button>
                     </div>
-                    <div class="bg-black border border-zinc-800 p-8 rounded hover:border-red-600 transition">
-                        <h3 class="font-hype text-xl mb-4 italic uppercase">GHOST EDITION</h3>
-                        <p class="text-white text-5xl font-black mb-6" id="votos-ghost">0</p>
-                        <button onclick="votar('ghost')" id="btn-ghost" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">VOTAR</button>
+                    <div class="bg-black border border-zinc-800 p-6 rounded">
+                        <h3 class="font-hype text-sm mb-4">SCARFACE V2</h3>
+                        <p id="votos-scarface" class="text-red-600 text-5xl font-black mb-6">0</p>
+                        <button onclick="votar('scarface')" id="btn-scarface" class="w-full bg-white text-black py-3 font-black text-[9px] uppercase hover:bg-red-600 transition">VOTAR</button>
                     </div>
-                    <div class="bg-black border border-zinc-800 p-8 rounded hover:border-red-600 transition">
-                        <h3 class="font-hype text-xl mb-4 italic uppercase">ALWAYS WITH GOD</h3>
-                        <p class="text-white text-5xl font-black mb-6" id="votos-god">0</p>
-                        <button onclick="votar('god')" id="btn-god" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">VOTAR</button>
+                    <div class="bg-black border border-zinc-800 p-6 rounded">
+                        <h3 class="font-hype text-sm mb-4">ALWAYS GOD</h3>
+                        <p id="votos-god" class="text-red-600 text-5xl font-black mb-6">0</p>
+                        <button onclick="votar('god')" id="btn-god" class="w-full bg-white text-black py-3 font-black text-[9px] uppercase hover:bg-red-600 transition">VOTAR</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="py-20 text-center bg-black border-t border-zinc-900">
-            <p class="text-zinc-600 text-[10px] font-black uppercase tracking-[1em]">CONCREZ WEAR © 2026 | JALES-SP</p>
-        </footer>
+        <footer class="py-10 text-center text-zinc-700 text-[8px] font-black uppercase tracking-[1em]">CONCREZ 2026</footer>
     </div>
 
+    <div id="productModal">
+        <div class="max-w-md w-full">
+            <h2 id="modalTitle" class="font-hype text-4xl mb-2"></h2>
+            <p id="modalPrice" class="text-red-600 font-black text-xl mb-8"></p>
+            <div class="grid grid-cols-4 gap-2 mb-8">
+                <div class="size-btn" onclick="selectSize(this, 'P')">P</div>
+                <div class="size-btn" onclick="selectSize(this, 'M')">M</div>
+                <div class="size-btn" onclick="selectSize(this, 'G')">G</div>
+                <div class="size-btn" onclick="selectSize(this, 'GG')">GG</div>
+            </div>
+            <button onclick="buyWhatsApp()" class="w-full bg-white text-black py-5 font-black uppercase text-xs mb-4">Finalizar no WhatsApp</button>
+            <button onclick="closeModal()" class="w-full text-zinc-500 text-[9px] uppercase">Fechar</button>
+        </div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Dados extraídos do seu print
         const firebaseConfig = {
             apiKey: "AIzaSyA8KA7BSNhHaoCzvFStA-ea6JhLEJofARB",
             authDomain: "concrez.firebaseapp.com",
             projectId: "concrez",
-            storageBucket: "concrez.firebasestorage.app",
-            messagingSenderId: "765598113178",
-            appId: "1:765598113178:web:15abd36b763ce00ac9ee23",
-            databaseURL: "https://concrez-default-rtdb.firebaseio.com"
+            databaseURL: "https://concrez-default-rtdb.firebaseio.com",
+            appId: "1:765598113178:web:15abd36b763ce00ac9ee23"
         };
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        let meusVotosCount = 0;
+        let userVotes = 0;
 
-        // Atualiza votos na tela em tempo real
-        const ids = ['scarface', 'ghost', 'god'];
-        ids.forEach(id => {
+        ['ghost', 'scarface', 'god'].forEach(id => {
             onValue(ref(db, 'votos/' + id), (snap) => {
                 document.getElementById('votos-' + id).innerText = snap.val() || 0;
             });
         });
 
-        // Função para votar
         window.votar = function(id) {
-            if (meusVotosCount >= 2) {
-                alert("VOCÊ JÁ VOTOU EM 2 MODELOS!");
-                return;
-            }
-            runTransaction(ref(db, 'votos/' + id), (atual) => (atual || 0) + 1).then(() => {
-                meusVotosCount++;
-                const b = document.getElementById('btn-' + id);
-                b.disabled = true; b.innerText = "VOTADO"; b.style.opacity = "0.5";
+            if (userVotes >= 2) return alert("VOCÊ JÁ VOTOU 2 VEZES!");
+            runTransaction(ref(db, 'votos/' + id), (c) => (c || 0) + 1).then(() => {
+                userVotes++;
+                document.getElementById('btn-' + id).innerText = "VOTADO";
+                document.getElementById('btn-' + id).style.opacity = "0.5";
             });
         };
     </script>
 
     <script>
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0', width: '0', videoId: 'BUL7zecHZjA',
+                playerVars: { 'autoplay': 0, 'controls': 0 }
+            });
+        }
+
+        function playTrack(id, name) {
+            player.loadVideoById(id);
+            document.getElementById('current-track-name').innerText = name;
+        }
+
         function entrarNoSite() {
             document.getElementById('preloader').classList.add('loader-hidden');
             document.getElementById('main-content').classList.remove('site-blur');
+            player.playVideo();
+        }
+
+        let sProduct = '', sSize = '';
+        function openModal(n, p) { sProduct = n; document.getElementById('modalTitle').innerText = n; document.getElementById('modalPrice').innerText = 'R$ '+p; document.getElementById('productModal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('productModal').style.display = 'none'; }
+        function selectSize(el, s) { sSize = s; document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
+        function buyWhatsApp() { 
+            if(!sSize) return alert("Escolha o tamanho!");
+            window.open(`https://wa.me/5517996515869?text=Salve! Quero a ${sProduct} tamanho ${sSize}`);
         }
     </script>
 </body>
-</html>
+    </html>
+    

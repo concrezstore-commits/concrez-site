@@ -3,110 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONCREZ | Sound & Wear Experience</title>
+    <title>CONCREZ | Sound & Wear</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;700;900&display=swap');
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap');
+        
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
         .font-hype { font-family: 'Archivo Black', sans-serif; }
-        #main-content { transition: filter 1.2s cubic-bezier(0.165, 0.84, 0.44, 1); }
-        .site-blur { filter: blur(30px); pointer-events: none; }
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; cursor: pointer; transition: 0.8s; }
-        .loader-hidden { opacity: 0 !important; visibility: hidden !important; }
-        .product-card { background: #09090b; border: 1px solid #18181b; transition: 0.4s; }
-        .product-card:hover { border-color: #dc2626; transform: translateY(-5px); }
-        #productModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.98); z-index: 9999; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(10px); }
-        .size-btn { border: 1px solid #27272a; padding: 15px; font-weight: 900; transition: 0.3s; width: 100%; text-align: center; cursor: pointer; }
-        .size-btn.active { background-color: #dc2626; border-color: #dc2626; color: white; }
+
+        /* Estilo da Marca */
+        .brand-title { 
+            font-size: clamp(3rem, 15vw, 12rem); 
+            line-height: 0.8; 
+            letter-spacing: -0.05em;
+        }
+
+        /* Efeito de Vidro/Glassmorphism */
+        .glass { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid #1a1a1a; }
+
+        /* Cards do Catálogo */
+        .product-card { background: #080808; border: 1px solid #111; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .product-card:hover { border-color: #dc2626; transform: scale(1.02); }
+
+        /* Modal */
+        #sizeModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.98); z-index: 10000; justify-content: center; align-items: center; }
+        .size-btn { border: 1px solid #222; padding: 20px; text-align: center; cursor: pointer; font-weight: 900; transition: 0.3s; }
+        .size-btn:hover, .size-btn.active { background: #dc2626; border-color: #dc2626; color: white; }
+
+        /* Animação de entrada */
+        #preloader { position: fixed; inset: 0; background: #000; z-index: 20000; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; }
     </style>
 </head>
-<body id="inicio">
+<body>
 
-    <div id="preloader" onclick="entrarNoSite()">
-        <h1 class="font-hype text-6xl md:text-9xl text-red-600 italic uppercase tracking-tighter animate-pulse">CONCREZ</h1>
-        <p class="mt-8 text-[9px] tracking-[0.8em] font-black text-zinc-700 uppercase">TOQUE PARA ENTRAR</p>
+    <div id="preloader" onclick="iniciarSite()">
+        <h1 class="font-hype text-red-600 italic uppercase brand-title animate-pulse">CONCREZ</h1>
+        <p class="mt-10 text-[10px] tracking-[1em] text-zinc-500 font-black uppercase">Click to Connect</p>
     </div>
 
-    <div id="main-content" class="site-blur">
-        <nav class="py-6 px-6 border-b border-zinc-900 flex justify-between items-center sticky top-0 bg-black/95 backdrop-blur-md z-50">
+    <div id="conteudo-principal" style="opacity: 0; transition: 1s;">
+        
+        <nav class="glass sticky top-0 z-50 p-6 flex justify-between items-center">
             <div class="font-hype text-3xl italic text-red-600 uppercase tracking-tighter">CONCREZ</div>
-            <a href="https://www.instagram.com/concrez.br" target="_blank" class="text-[9px] font-black uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition">@CONCREZ.BR</a>
+            <div class="flex gap-6 items-center">
+                <a href="#catalogo" class="text-[10px] font-black uppercase tracking-widest hover:text-red-600 transition">Drop</a>
+                <a href="#votacao" class="text-[10px] font-black uppercase tracking-widest hover:text-red-600 transition">Votação</a>
+                <a href="https://www.instagram.com/concrez.br" target="_blank" class="bg-white text-black px-4 py-2 text-[10px] font-black uppercase">IG</a>
+            </div>
         </nav>
 
-        <section class="py-12 px-6 border-b border-zinc-900 bg-zinc-950">
-            <div class="max-w-4xl mx-auto text-center">
-                <p class="text-[9px] font-black text-zinc-500 tracking-[0.5em] mb-4 uppercase">Sound Experience</p>
-                <h2 id="current-track-name" class="font-hype text-2xl italic mb-6">GORILA ROXO - MATUÊ</h2>
+        <section class="py-24 px-6 border-b border-zinc-900 overflow-hidden">
+            <div class="max-w-6xl mx-auto">
+                <p class="text-[10px] font-black text-red-600 tracking-[0.5em] mb-4 uppercase">Now Experiencing</p>
+                <h2 id="musica-atual" class="font-hype text-4xl md:text-7xl italic uppercase mb-12">GORILA ROXO - MATUÊ</h2>
                 
-                <div id="youtube-player" style="display:none"></div>
+                <div id="player-youtube" class="hidden"></div>
 
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button onclick="playTrack('BUL7zecHZjA', 'GORILA ROXO - MATUÊ')" class="bg-white text-black px-6 py-3 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Gorila Roxo</button>
-                    <button onclick="playTrack('m226f2reF28', 'ANOS LUZ - MATUÊ')" class="bg-white text-black px-6 py-3 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Anos Luz</button>
-                    <button onclick="playTrack('mV4cWyl7zYU', 'GROUPIES - MATUÊ')" class="bg-white text-black px-6 py-3 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Groupies</button>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="trocarMusica('BUL7zecHZjA', 'GORILA ROXO - MATUÊ')" class="border border-zinc-800 p-6 text-[10px] font-black uppercase hover:bg-zinc-900 transition text-left">01. Gorila Roxo</button>
+                    <button onclick="trocarMusica('m226f2reF28', 'ANOS LUZ - MATUÊ')" class="border border-zinc-800 p-6 text-[10px] font-black uppercase hover:bg-zinc-900 transition text-left">02. Anos Luz</button>
+                    <button onclick="trocarMusica('mV4cWyl7zYU', 'GROUPIES - MATUÊ')" class="border border-zinc-800 p-6 text-[10px] font-black uppercase hover:bg-zinc-900 transition text-left">03. Groupies</button>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 px-6">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="product-card p-6 text-center">
-                    <div class="bg-zinc-900 aspect-square mb-6 flex items-center justify-center font-hype text-zinc-800 text-4xl italic uppercase border border-zinc-800">Scarface V1</div>
-                    <h3 class="font-hype text-2xl mb-2">SCARFACE V1 BLACK</h3>
-                    <p class="text-red-600 font-black text-2xl mb-6">R$ 129,90</p>
-                    <button onclick="openModal('Scarface V1 Black', '129,90')" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Comprar</button>
-                </div>
-                <div class="product-card p-6 text-center">
-                    <div class="bg-zinc-900 aspect-square mb-6 flex items-center justify-center font-hype text-zinc-800 text-4xl italic uppercase border border-zinc-800">Faith Design</div>
-                    <h3 class="font-hype text-2xl mb-2">FAITH MINIMALIST</h3>
-                    <p class="text-red-600 font-black text-2xl mb-6">R$ 139,90</p>
-                    <button onclick="openModal('Faith Minimalist', '139,90')" class="w-full bg-white text-black py-4 font-black text-[10px] uppercase hover:bg-red-600 hover:text-white transition">Comprar</button>
+        <section id="catalogo" class="py-32 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="font-hype text-4xl italic uppercase mb-16 border-l-8 border-red-600 pl-6">Season 01 Drop</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="product-card p-4">
+                        <div class="aspect-[4/5] bg-zinc-900 mb-8 flex items-center justify-center border border-zinc-800">
+                            <span class="font-hype text-zinc-800 text-5xl italic uppercase">Scarface V1</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h4 class="font-hype text-2xl uppercase mb-1">Scarface V1 Black</h4>
+                                <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Heavyweight Cotton 260g</p>
+                            </div>
+                            <p class="text-red-600 font-black text-2xl">R$ 129,90</p>
+                        </div>
+                        <button onclick="abrirModal('Scarface V1 Black', '129,90')" class="w-full mt-8 bg-white text-black py-5 font-black text-xs uppercase hover:bg-red-600 hover:text-white transition">Adicionar ao Drop</button>
+                    </div>
+
+                    <div class="product-card p-4">
+                        <div class="aspect-[4/5] bg-zinc-900 mb-8 flex items-center justify-center border border-zinc-800">
+                            <span class="font-hype text-zinc-800 text-5xl italic uppercase">Faith Design</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <h4 class="font-hype text-2xl uppercase mb-1">Faith Minimalist</h4>
+                                <p class="text-zinc-500 text-[10px] font-black uppercase tracking-widest">Limited Edition</p>
+                            </div>
+                            <p class="text-red-600 font-black text-2xl">R$ 139,90</p>
+                        </div>
+                        <button onclick="abrirModal('Faith Minimalist', '139,90')" class="w-full mt-8 bg-white text-black py-5 font-black text-xs uppercase hover:bg-red-600 hover:text-white transition">Adicionar ao Drop</button>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-20 px-6 bg-zinc-950 border-t border-zinc-900">
+        <section id="votacao" class="py-32 px-6 bg-zinc-950 border-t border-zinc-900">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="font-hype text-4xl italic mb-12">VOTE NO PRÓXIMO DROP</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-black border border-zinc-800 p-6 rounded">
-                        <h3 class="font-hype text-sm mb-4">GHOST EDITION</h3>
-                        <p id="votos-ghost" class="text-red-600 text-5xl font-black mb-6">0</p>
-                        <button onclick="votar('ghost')" id="btn-ghost" class="w-full bg-white text-black py-3 font-black text-[9px] uppercase hover:bg-red-600 transition">VOTAR</button>
+                <h3 class="font-hype text-5xl italic uppercase mb-4">The Next Choice</h3>
+                <p class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.5em] mb-20">Você decide o futuro da marca</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-black border border-zinc-800 p-10">
+                        <p class="text-[9px] font-black text-zinc-600 uppercase mb-4">Ghost Edition</p>
+                        <div id="v-ghost" class="text-7xl font-hype text-red-600 mb-8">0</div>
+                        <button onclick="votar('ghost')" class="w-full border border-white py-3 text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Votar</button>
                     </div>
-                    <div class="bg-black border border-zinc-800 p-6 rounded">
-                        <h3 class="font-hype text-sm mb-4">SCARFACE V2</h3>
-                        <p id="votos-scarface" class="text-red-600 text-5xl font-black mb-6">0</p>
-                        <button onclick="votar('scarface')" id="btn-scarface" class="w-full bg-white text-black py-3 font-black text-[9px] uppercase hover:bg-red-600 transition">VOTAR</button>
+                    <div class="bg-black border border-zinc-800 p-10">
+                        <p class="text-[9px] font-black text-zinc-600 uppercase mb-4">Scarface V2</p>
+                        <div id="v-scarface" class="text-7xl font-hype text-red-600 mb-8">0</div>
+                        <button onclick="votar('scarface')" class="w-full border border-white py-3 text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Votar</button>
                     </div>
-                    <div class="bg-black border border-zinc-800 p-6 rounded">
-                        <h3 class="font-hype text-sm mb-4">ALWAYS GOD</h3>
-                        <p id="votos-god" class="text-red-600 text-5xl font-black mb-6">0</p>
-                        <button onclick="votar('god')" id="btn-god" class="w-full bg-white text-black py-3 font-black text-[9px] uppercase hover:bg-red-600 transition">VOTAR</button>
+                    <div class="bg-black border border-zinc-800 p-10">
+                        <p class="text-[9px] font-black text-zinc-600 uppercase mb-4">Always God</p>
+                        <div id="v-god" class="text-7xl font-hype text-red-600 mb-8">0</div>
+                        <button onclick="votar('god')" class="w-full border border-white py-3 text-[10px] font-black uppercase hover:bg-white hover:text-black transition">Votar</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer class="py-10 text-center text-zinc-700 text-[8px] font-black uppercase tracking-[1em]">CONCREZ 2026</footer>
+        <footer class="py-20 text-center border-t border-zinc-900">
+            <div class="font-hype text-6xl text-zinc-900 italic uppercase mb-6">CONCREZ</div>
+            <p class="text-zinc-700 text-[9px] font-black uppercase tracking-[1em]">Always With God. 2026</p>
+        </footer>
     </div>
 
-    <div id="productModal">
-        <div class="max-w-md w-full">
-            <h2 id="modalTitle" class="font-hype text-4xl mb-2"></h2>
-            <p id="modalPrice" class="text-red-600 font-black text-xl mb-8"></p>
-            <div class="grid grid-cols-4 gap-2 mb-8">
-                <div class="size-btn" onclick="selectSize(this, 'P')">P</div>
-                <div class="size-btn" onclick="selectSize(this, 'M')">M</div>
-                <div class="size-btn" onclick="selectSize(this, 'G')">G</div>
-                <div class="size-btn" onclick="selectSize(this, 'GG')">GG</div>
+    <div id="sizeModal">
+        <div class="max-w-sm w-full p-6">
+            <h2 id="modalNome" class="font-hype text-3xl italic uppercase mb-2"></h2>
+            <p id="modalPreco" class="text-red-600 font-black text-xl mb-12"></p>
+            
+            <p class="text-[9px] font-black text-zinc-500 uppercase mb-4 tracking-widest">Selecione o Size:</p>
+            <div class="grid grid-cols-2 gap-4 mb-10">
+                <div class="size-btn" onclick="selecionarTamanho(this, 'P')">P</div>
+                <div class="size-btn" onclick="selecionarTamanho(this, 'M')">M</div>
+                <div class="size-btn" onclick="selecionarTamanho(this, 'G')">G</div>
+                <div class="size-btn" onclick="selecionarTamanho(this, 'GG')">GG</div>
             </div>
-            <button onclick="buyWhatsApp()" class="w-full bg-white text-black py-5 font-black uppercase text-xs mb-4">Finalizar no WhatsApp</button>
-            <button onclick="closeModal()" class="w-full text-zinc-500 text-[9px] uppercase">Fechar</button>
+
+            <button onclick="checkoutWhats()" class="w-full bg-white text-black py-5 font-black uppercase text-sm mb-4">Fechar Pedido no WhatsApp</button>
+            <button onclick="fecharModal()" class="w-full text-zinc-700 text-[10px] font-black uppercase tracking-widest">Voltar</button>
         </div>
     </div>
 
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -121,53 +166,62 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-        let userVotes = 0;
 
-        ['ghost', 'scarface', 'god'].forEach(id => {
-            onValue(ref(db, 'votos/' + id), (snap) => {
-                document.getElementById('votos-' + id).innerText = snap.val() || 0;
+        ['ghost', 'scarface', 'god'].forEach(item => {
+            onValue(ref(db, 'votos/' + item), (snap) => {
+                document.getElementById('v-' + item).innerText = snap.val() || 0;
             });
         });
 
-        window.votar = function(id) {
-            if (userVotes >= 2) return alert("VOCÊ JÁ VOTOU 2 VEZES!");
-            runTransaction(ref(db, 'votos/' + id), (c) => (c || 0) + 1).then(() => {
-                userVotes++;
-                document.getElementById('btn-' + id).innerText = "VOTADO";
-                document.getElementById('btn-' + id).style.opacity = "0.5";
-            });
+        window.votar = (item) => {
+            runTransaction(ref(db, 'votos/' + item), (v) => (v || 0) + 1);
         };
     </script>
 
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         let player;
+        let prodSel = '', tamSel = '';
+
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtube-player', {
+            player = new YT.Player('player-youtube', {
                 height: '0', width: '0', videoId: 'BUL7zecHZjA',
                 playerVars: { 'autoplay': 0, 'controls': 0 }
             });
         }
 
-        function playTrack(id, name) {
+        function trocarMusica(id, nome) {
             player.loadVideoById(id);
-            document.getElementById('current-track-name').innerText = name;
+            document.getElementById('musica-atual').innerText = nome;
         }
 
-        function entrarNoSite() {
-            document.getElementById('preloader').classList.add('loader-hidden');
-            document.getElementById('main-content').classList.remove('site-blur');
+        function iniciarSite() {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('conteudo-principal').style.opacity = '1';
             player.playVideo();
         }
 
-        let sProduct = '', sSize = '';
-        function openModal(n, p) { sProduct = n; document.getElementById('modalTitle').innerText = n; document.getElementById('modalPrice').innerText = 'R$ '+p; document.getElementById('productModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('productModal').style.display = 'none'; }
-        function selectSize(el, s) { sSize = s; document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
-        function buyWhatsApp() { 
-            if(!sSize) return alert("Escolha o tamanho!");
-            window.open(`https://wa.me/5517996515869?text=Salve! Quero a ${sProduct} tamanho ${sSize}`);
+        function abrirModal(n, p) {
+            prodSel = n;
+            document.getElementById('modalNome').innerText = n;
+            document.getElementById('modalPreco').innerText = 'R$ ' + p;
+            document.getElementById('sizeModal').style.display = 'flex';
+        }
+
+        function fecharModal() { document.getElementById('sizeModal').style.display = 'none'; }
+
+        function selecionarTamanho(el, t) {
+            tamSel = t;
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function checkoutWhats() {
+            if(!tamSel) return alert("Escolha o tamanho primeiro!");
+            const link = `https://wa.me/5517996515869?text=Salve!+Quero+a+${prodSel}+no+tamanho+${tamSel}`;
+            window.open(link);
         }
     </script>
 </body>
-    </html>
-    
+                            </html>
+                            

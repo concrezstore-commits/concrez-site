@@ -7,98 +7,113 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;900&display=swap');
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; }
         .font-hype { font-family: 'Archivo Black', sans-serif; font-style: italic; text-transform: uppercase; }
-        .product-card { background: #0a0a0a; border: 1px solid #111; }
-        .btn-action { background: #fff; color: #000; font-weight: 900; text-transform: uppercase; font-size: 10px; transition: 0.2s; }
-        .btn-action:hover { background: #dc2626; color: #fff; }
+        .brand-title { font-size: clamp(3rem, 15vw, 10rem); line-height: 0.8; letter-spacing: -0.05em; }
+        .product-card { background: #000; }
+        .btn-buy { background: #fff; color: #000; font-weight: 900; text-transform: uppercase; font-size: 10px; width: 100%; padding: 12px 0; }
+        .vote-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #111; margin-bottom: 10px; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4">
 
-    <nav class="flex justify-between items-center mb-16">
-        <h1 class="font-hype text-red-600 text-2xl">CONCREZ</h1>
-        <div class="flex gap-4 text-[9px] font-black uppercase tracking-tighter">
-            <a href="#drop">Drop</a>
-            <a href="#votacao">Votação</a>
-            <span>IG: @CONCREZ.BR</span>
-        </div>
+    <nav class="flex justify-between items-center mb-12">
+        <h1 class="font-hype text-red-600 text-xl">CONCREZ</h1>
+        <button class="border border-white text-[8px] font-black px-3 py-1 uppercase">IG: @CONCREZ.BR</button>
     </nav>
 
+    <header class="text-center mb-24">
+        <h1 class="font-hype brand-title mb-4">CONCREZ</h1>
+        <h2 class="font-hype text-zinc-800 text-5xl md:text-8xl leading-none mb-6">ALWAYS<br>WITH<br>GOD.</h2>
+        <div class="text-4xl">🙏</div>
+    </header>
+
     <section class="mb-24">
-        <p class="text-[9px] font-black text-red-600 tracking-widest mb-2 italic">NOW EXPERIENCING</p>
-        <h2 id="musica-atual" class="font-hype text-3xl md:text-5xl mb-8">GORILA ROXO - MATUÊ</h2>
-        
+        <p class="text-[8px] font-black text-zinc-500 tracking-widest mb-1 uppercase">SOUND EXPERIENCE</p>
+        <h3 id="current-track" class="font-hype text-2xl mb-6">GORILA ROXO - MATUÊ</h3>
         <div class="grid grid-cols-3 gap-2">
-            <button onclick="play('BUL7zecHZjA', 'GORILA ROXO - MATUÊ')" class="border border-zinc-800 py-4 text-[8px] font-black uppercase hover:bg-zinc-900 transition">01. GORILA ROXO</button>
-            <button onclick="play('m226f2reF28', 'ANOS LUZ - MATUÊ')" class="border border-zinc-800 py-4 text-[8px] font-black uppercase hover:bg-zinc-900 transition">02. ANOS LUZ</button>
-            <button onclick="play('mV4cWyl7zYU', 'GROUPIES - MATUÊ')" class="border border-zinc-800 py-4 text-[8px] font-black uppercase hover:bg-zinc-900 transition">03. GROUPIES</button>
+            <button onclick="play('BUL7zecHZjA', 'GORILA ROXO')" class="bg-white text-black text-[8px] font-bold py-3 uppercase">Gorila Roxo</button>
+            <button onclick="play('m226f2reF28', 'ANOS LUZ')" class="bg-white text-black text-[8px] font-bold py-3 uppercase">Anos Luz</button>
+            <button onclick="play('mV4cWyl7zYU', 'GROUPIES')" class="bg-white text-black text-[8px] font-bold py-3 uppercase">Groupies</button>
         </div>
-        <div id="player-yt" class="hidden"></div>
+        <div id="yt-player" class="hidden"></div>
     </section>
 
-    <section id="drop" class="mb-32">
-        <div class="flex items-center gap-3 mb-12">
-            <div class="w-1.5 h-8 bg-red-600"></div>
-            <h3 class="font-hype text-3xl">SEASON 01 DROP</h3>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="product-card p-4">
-                <div class="aspect-square bg-zinc-900 mb-6 flex items-center justify-center">
-                    <span class="font-hype text-zinc-800 text-2xl">SCARFACE V1</span>
-                </div>
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <h4 class="font-hype text-lg">SCARFACE V1 BLACK</h4>
-                        <p class="text-[8px] text-zinc-600 font-bold uppercase">HEAVYWEIGHT COTTON 260G</p>
-                    </div>
-                    <p class="text-red-600 font-hype text-xl">R$ 129,90</p>
-                </div>
-                <button onclick="comprar('SCARFACE V1 BLACK')" class="btn-action w-full py-4">ADICIONAR AO DROP</button>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32">
+        <div class="product-card">
+            <img src="LINK_DA_FOTO_SCARFACE" alt="Scarface" class="w-full mb-4">
+            <div class="flex justify-between items-baseline italic">
+                <span class="font-hype text-xs">CAMISA CONCREZ SCARFECE</span>
+                <span class="font-hype text-red-600 text-lg">R$ 95,00</span>
             </div>
-
-            <div class="product-card p-4">
-                <div class="aspect-square bg-zinc-900 mb-6 flex items-center justify-center">
-                    <span class="font-hype text-zinc-800 text-2xl">FAITH DESIGN</span>
-                </div>
-                <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <h4 class="font-hype text-lg">FAITH MINIMALIST</h4>
-                        <p class="text-[8px] text-zinc-600 font-bold uppercase">LIMITED EDITION</p>
-                    </div>
-                    <p class="text-red-600 font-hype text-xl">R$ 139,90</p>
-                </div>
-                <button onclick="comprar('FAITH MINIMALIST')" class="btn-action w-full py-4">ADICIONAR AO DROP</button>
+        </div>
+        <div class="product-card">
+            <img src="LINK_DA_FOTO_BASIC" alt="Basic" class="w-full mb-4">
+            <div class="flex justify-between items-baseline italic">
+                <span class="font-hype text-xs">CAMISA CONCREZ BASIC</span>
+                <span class="font-hype text-red-600 text-lg">R$ 65,00</span>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="LINK_DA_FOTO_EYES" alt="Eyes" class="w-full mb-4">
+            <div class="flex justify-between items-baseline italic">
+                <span class="font-hype text-xs">CAMISA CONCREZ EYES</span>
+                <span class="font-hype text-red-600 text-lg">R$ 85,00</span>
+            </div>
+        </div>
+        <div class="product-card">
+            <img src="LINK_DA_FOTO_FUCK" alt="Fuck" class="w-full mb-4">
+            <div class="flex justify-between items-baseline italic">
+                <span class="font-hype text-xs">CAMISA CONCREZ FUCK</span>
+                <span class="font-hype text-red-600 text-lg">R$ 95,00</span>
             </div>
         </div>
     </section>
 
-    <section id="votacao" class="mb-32 text-center">
-        <h3 class="font-hype text-4xl mb-2">THE NEXT CHOICE</h3>
-        <p class="text-[8px] text-zinc-500 font-black uppercase tracking-[0.4em] mb-16">VOCÊ DECIDE O FUTURO DA MARCA</p>
-
-        <div class="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
-            <div class="bg-zinc-950 p-8 border border-zinc-900">
-                <p class="text-[8px] font-black text-zinc-600 uppercase mb-4">GHOST EDITION</p>
-                <div id="v-ghost" class="text-5xl font-hype text-red-600 mb-6">0</div>
-                <button onclick="voto('ghost')" class="btn-action w-full py-2">VOTAR</button>
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 border-t border-zinc-900 pt-12">
+        <div>
+            <h2 class="font-hype text-red-600 text-4xl mb-6">O MANIFESTO</h2>
+            <p class="font-black text-xs leading-relaxed uppercase">Nós temos apenas 14 anos, mas a nossa determinação já é maior que o de muito adulto por aí.</p>
+            <p class="text-zinc-600 text-[8px] mt-4 font-bold uppercase italic">"Sempre com Deus guiando cada passo."</p>
+        </div>
+        <div class="flex flex-col gap-6 italic">
+            <div>
+                <h4 class="font-hype text-xl">João Pedro</h4>
+                <p class="text-red-600 text-[8px] font-black uppercase">Fundador & Dono</p>
             </div>
-            <div class="bg-zinc-950 p-8 border border-zinc-900">
-                <p class="text-[8px] font-black text-zinc-600 uppercase mb-4">SCARFACE V2</p>
-                <div id="v-scarface" class="text-5xl font-hype text-red-600 mb-6">0</div>
-                <button onclick="voto('scarface')" class="btn-action w-full py-2">VOTAR</button>
-            </div>
-            <div class="bg-zinc-950 p-8 border border-zinc-900">
-                <p class="text-[8px] font-black text-zinc-600 uppercase mb-4">ALWAYS GOD</p>
-                <div id="v-god" class="text-5xl font-hype text-red-600 mb-6">0</div>
-                <button onclick="voto('god')" class="btn-action w-full py-2">VOTAR</button>
+            <div>
+                <h4 class="font-hype text-xl">Gustavo Pereira</h4>
+                <p class="text-red-600 text-[8px] font-black uppercase">Sócio & Sub-Dono</p>
             </div>
         </div>
     </section>
 
-    <footer class="text-center py-12 border-t border-zinc-900">
-        <p class="text-[8px] font-black text-zinc-800 uppercase tracking-[2em]">CONCREZ 2026</p>
+    <section class="mb-32 text-center">
+        <h3 class="font-hype text-3xl mb-12 italic">VOTE NO PRÓXIMO DROP</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-zinc-950 p-4 border border-zinc-900">
+                <div class="vote-img flex items-center justify-center font-hype text-zinc-800">FOTO GHOST</div>
+                <p class="text-[8px] font-black text-zinc-500 uppercase mb-2">GHOST EDITION</p>
+                <div id="v-ghost" class="text-4xl font-hype text-red-600 mb-4">0</div>
+                <button onclick="voto('ghost')" class="btn-buy py-2">VOTAR</button>
+            </div>
+            <div class="bg-zinc-950 p-4 border border-zinc-900">
+                <div class="vote-img flex items-center justify-center font-hype text-zinc-800">FOTO SCARFACE V2</div>
+                <p class="text-[8px] font-black text-zinc-500 uppercase mb-2">SCARFACE V2</p>
+                <div id="v-scarface" class="text-4xl font-hype text-red-600 mb-4">0</div>
+                <button onclick="voto('scarface')" class="btn-buy py-2">VOTAR</button>
+            </div>
+            <div class="bg-zinc-950 p-4 border border-zinc-900">
+                <div class="vote-img flex items-center justify-center font-hype text-zinc-800">FOTO ALWAYS GOD</div>
+                <p class="text-[8px] font-black text-zinc-500 uppercase mb-2">ALWAYS GOD</p>
+                <div id="v-god" class="text-4xl font-hype text-red-600 mb-4">0</div>
+                <button onclick="voto('god')" class="btn-buy py-2">VOTAR</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center py-8 text-zinc-900 text-[8px] font-black uppercase tracking-[1em]">
+        CONCREZ 2026
     </footer>
 
     <script type="module">
@@ -117,32 +132,17 @@
         const db = getDatabase(app);
 
         ['ghost', 'scarface', 'god'].forEach(item => {
-            onValue(ref(db, 'votos/' + item), (snap) => {
-                document.getElementById('v-' + item).innerText = snap.val() || 0;
-            });
+            onValue(ref(db, 'votos/' + item), (s) => { document.getElementById('v-'+item).innerText = s.val() || 0; });
         });
 
-        window.voto = (item) => {
-            runTransaction(ref(db, 'votos/' + item), (v) => (v || 0) + 1);
-        };
+        window.voto = (item) => { runTransaction(ref(db, 'votos/' + item), (v) => (v || 0) + 1); };
     </script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         let player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player-yt', {
-                height: '0', width: '0', videoId: 'BUL7zecHZjA',
-                playerVars: { 'autoplay': 1, 'controls': 0 }
-            });
-        }
-        function play(id, nome) {
-            player.loadVideoById(id);
-            document.getElementById('musica-atual').innerText = nome;
-        }
-        function comprar(nome) {
-            window.open(`https://wa.me/5517996515869?text=Quero+a+${nome}`);
-        }
+        function onYouTubeIframeAPIReady() { player = new YT.Player('yt-player', { height: '0', width: '0', videoId: 'BUL7zecHZjA' }); }
+        function play(id, nome) { player.loadVideoById(id); document.getElementById('current-track').innerText = nome + " - MATUÊ"; }
     </script>
 </body>
 </html>
